@@ -250,12 +250,12 @@
                   <label>Gênero</label>
                   <div class="radio">
                     <label for="exampleInputGenderM">
-                      <input type="radio" id="exampleInputGenderM" name="gender">
+                      <input type="radio" id="exampleInputGenderM" name="gender" value="M" checked>
                       Masculino</label>
                   </div>
                   <div class="radio">
                     <label for="exampleInputGenderF">
-                      <input type="radio" id="exampleInputGenderF" name="gender">
+                      <input type="radio" id="exampleInputGenderF" name="gender" value="F">
                       Feminino</label>
                   </div>
                 </div>
@@ -266,8 +266,8 @@
                 <div class="form-group">
                   <label for="exampleInputCountry">País</label>
                   <select class="form-control" id="exampleInputCountry" name="country">
-                    <option value="" selected="selected">Selecione um país</option>
-                    <option value="United States">United States</option>
+                    <option value="" selected="selected" >Selecione um país</option>
+                    <option value="United States" >United States</option>
                     <option value="United Kingdom">United Kingdom</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -512,11 +512,11 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">E-mail</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Digite o e-mail" name="email">
+                  <input type="email" class="form-control" id="exampleInputEmail" placeholder="Digite o e-mail" name="email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Senha</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Crie uma senha" name="password">
+                  <input type="password" class="form-control" id="exampleInputPassword" placeholder="Crie uma senha" name="password">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Foto</label>
@@ -524,7 +524,7 @@
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="admin"> Administrador
+                    <input type="checkbox" name="admin" id="exampleInputAdmin"> Administrador
                   </label>
                 </div>
               </div>
@@ -554,6 +554,6 @@
   </footer>
 
 </div>
-
+<script src="index.js"></script>
 </body>
 </html>
