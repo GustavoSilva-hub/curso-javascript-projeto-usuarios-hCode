@@ -2,9 +2,10 @@ var fields = document.querySelectorAll("#form-user-create [name]");
 var user = {};
 
 function addLine(dataUser){
-    var tr = document.createElement('tr');
 
-    tr.innerHTML = `<tr>
+    tBodyUsersLines = document.getElementById('table-users');
+     
+    tBodyUsersLines.innerHTML = `<tr>
     <td>
       <img src="dist/img/user1-128x128.jpg" alt="User Image" class="img-circle img-sm">
     </td>
@@ -18,7 +19,7 @@ function addLine(dataUser){
     </td>
   </tr>`;
 
-  document.getElementById('table-users').appendChild(tr);
+  tBodyUsersLines.appendChild(tr);
 }
 
 document.getElementById("form-user-create").addEventListener("submit",function(event){
