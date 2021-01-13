@@ -2,9 +2,9 @@ var fields = document.querySelectorAll("#form-user-create [name]");
 var user = {};
 
 function addLine(dataUser){
-    var tr = document.createElement('tr');
+    var tBodyUsers = document.getElementById('table-users');
 
-    tr.innerHTML = `<tr>
+    tBodyUsers.innerHTML = `<tr>
     <td>
       <img src="dist/img/user1-128x128.jpg" alt="User Image" class="img-circle img-sm">
     </td>
@@ -17,8 +17,6 @@ function addLine(dataUser){
       <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
     </td>
   </tr>`;
-
-  document.getElementById('table-users').appendChild(tr);
 }
 
 document.getElementById("form-user-create").addEventListener("submit",function(event){
