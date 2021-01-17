@@ -11,16 +11,40 @@ class UserController {
         this.formEl.addEventListener("submit", event => {
             event.preventDefault();
 
-            this.addLine(this.getFormValues());
+            let values = this.getFormValues();
+
+            this.getPhoto((content)=>{
+                values.photo = content;
+
+                this.addLine(values);
+            });          
         })
 
+    }
+
+    getPhoto(callBack){
+        let fileReader = new FileReader();
+
+        let filterElements = [...this.formEl.elements].filter(element =>{
+            if(element.name === 'photo'){
+                return element;
+            }
+        });
+
+        let filePhoto = filterElements[0].files[0];
+
+        fileReader.onload = ()=>{
+            callBack(fileReader.result);
+        };
+
+        fileReader.readAsDataURL(filePhoto);
     }
 
     getFormValues() {
 
         let user = {};
 
-        [...this.formEl.elemens].forEach(function (field, index) {
+        [...this.formEl.elements].forEach(function (field, index) {
             if (field.name == "gender") {
                 if (field.checked) {
                     console.log("Checked", field);
@@ -48,7 +72,7 @@ class UserController {
     
         this.tBodyEl.innerHTML = `<tr>
         <td>
-          <img src="dist/img/user1-128x128.jpg" alt="User Image" class="img-circle img-sm">
+          <img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm">
         </td>
         <td>${dataUser.name}</td>
         <td>${dataUser.email}</td>
