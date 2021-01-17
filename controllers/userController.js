@@ -69,8 +69,10 @@ class UserController {
     }
 
     addLine(dataUser, tBodyId){
-    
-        this.tBodyEl.innerHTML = `<tr>
+        
+        let userLine = document.createElement("tr");
+
+        userLine.innerHTML = `
         <td>
           <img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm">
         </td>
@@ -81,8 +83,9 @@ class UserController {
         <td>
           <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
           <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
-        </td>
-      </tr>`;
+        </td>`
+
+        this.tBodyEl.appendChild(userLine);
     }
     
 
