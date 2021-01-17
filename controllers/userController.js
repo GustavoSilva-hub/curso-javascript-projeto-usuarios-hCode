@@ -13,31 +13,43 @@ class UserController {
 
             let values = this.getFormValues();
 
-            this.getPhoto((content)=>{
-                values.photo = content;
-
-                this.addLine(values);
-            });          
+            this.getPhoto().then(
+                 (content) => {
+                    values.photo = content;
+                    this.addLine(values);
+                }, (error) => {
+                    console.error(e);
+                }
+            )
         })
 
     }
 
-    getPhoto(callBack){
-        let fileReader = new FileReader();
+    getPhoto() {
 
-        let filterElements = [...this.formEl.elements].filter(element =>{
-            if(element.name === 'photo'){
-                return element;
+        return new Promise((resolve, reject) => {
+            let fileReader = new FileReader();
+
+            let filterElements = [...this.formEl.elements].filter(element => {
+                if (element.name === 'photo') {
+                    return element;
+                }
+            });
+
+            let filePhoto = filterElements[0].files[0];
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (e) => {
+                reject(e);
             }
-        });
 
-        let filePhoto = filterElements[0].files[0];
+            fileReader.readAsDataURL(filePhoto);
+        })
 
-        fileReader.onload = ()=>{
-            callBack(fileReader.result);
-        };
 
-        fileReader.readAsDataURL(filePhoto);
     }
 
     getFormValues() {
@@ -68,8 +80,8 @@ class UserController {
             user.admin);
     }
 
-    addLine(dataUser, tBodyId){
-        
+    addLine(dataUser, tBodyId) {
+
         let userLine = document.createElement("tr");
 
         userLine.innerHTML = `
@@ -87,6 +99,6 @@ class UserController {
 
         this.tBodyEl.appendChild(userLine);
     }
-    
+
 
 }
