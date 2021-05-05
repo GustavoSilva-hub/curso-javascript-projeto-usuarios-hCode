@@ -18,7 +18,7 @@ class UserController {
                     values.photo = content;
                     this.addLine(values);
                 }, (error) => {
-                    console.error(e);
+                    console.error(error);
                 }
             )
         })
@@ -26,7 +26,6 @@ class UserController {
     }
 
     getPhoto() {
-
         return new Promise((resolve, reject) => {
             let fileReader = new FileReader();
 
@@ -46,10 +45,12 @@ class UserController {
                 reject(e);
             }
 
-            fileReader.readAsDataURL(filePhoto);
+            if(filePhoto){
+                fileReader.readAsDataURL(filePhoto);
+            }else{
+                resolve('dist/img/boxed-bg.jpg');
+            }
         })
-
-
     }
 
     getFormValues() {
@@ -58,13 +59,15 @@ class UserController {
 
         [...this.formEl.elements].forEach(function (field, index) {
             if (field.name == "gender") {
+
                 if (field.checked) {
-                    console.log("Checked", field);
                     user[field.name] = field.value;
                 }
 
-            } else {
-                user[field.name] = field.value;
+            } else if(field.name=="admin"){
+                user[field.name] = field.checked;
+            }else{
+                user[field.name]=field.value;
             }
 
         })
@@ -90,7 +93,7 @@ class UserController {
         </td>
         <td>${dataUser.name}</td>
         <td>${dataUser.email}</td>
-        <td>${dataUser.admin}</td>
+        <td>${dataUser.admin?'Sim':'Não'}</td>
         <td>${dataUser.birth}</td>
         <td>
           <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
