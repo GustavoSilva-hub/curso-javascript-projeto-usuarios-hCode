@@ -4,6 +4,7 @@ class UserController {
         this.formEl = document.getElementById(formId);
         this.tBodyEl = document.getElementById(tBodyId);
         this.onSubmit();
+        this.onEditCancel();
     }
 
     onSubmit() {
@@ -35,6 +36,19 @@ class UserController {
 
         })
 
+    }
+
+    onEditCancel() {
+        document.querySelector('#box-user-update .btn-cancel').addEventListener('click', e => {
+            this.changeFormVisibility();
+        });
+    }
+
+    changeFormVisibility() {
+        [document.getElementById('box-user-update').style.display, document.getElementById('box-user-create').style.display] 
+        = 
+        [document.getElementById('box-user-create').style.display, document.getElementById('box-user-update').style.display];
+        
     }
 
 
@@ -124,30 +138,36 @@ class UserController {
         <td>${dataUser.admin ? 'Sim' : 'Não'}</td>
         <td>${Utils.dateFormat(dataUser.register)}</td>
         <td>
-          <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+          <button type="button" class="btn btn-primary btn-edit btn-xs btn-flat">Editar</button>
           <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
         </td>`
+
+        userLine.querySelector(".btn-edit").addEventListener("click", e => {
+            this.changeFormVisibility();
+
+            console.log(JSON.parse(userLine.dataset.user))
+        });
 
         this.tBodyEl.appendChild(userLine);
 
         this.updateCount();
     }
 
-    updateCount(){
+    updateCount() {
 
         let numberUsers = 0;
         let numberAdmin = 0;
 
-        [...this.tBodyEl.children].forEach(tr=>{
+        [...this.tBodyEl.children].forEach(tr => {
 
             numberUsers++;
 
             let user = JSON.parse(tr.dataset.user);
 
-            if(user._admin) numberAdmin++;
+            if (user._admin) numberAdmin++;
         });
-        document.getElementById('numbers-of-users').innerText=`${numberUsers}`;
-        document.getElementById('numbers-of-admins').innerText=`${numberAdmin}`;
+        document.getElementById('numbers-of-users').innerText = `${numberUsers}`;
+        document.getElementById('numbers-of-admins').innerText = `${numberAdmin}`;
     }
 
 
